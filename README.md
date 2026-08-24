@@ -1,53 +1,38 @@
-# Dawn View — Shareable Web Preview v0.1
+# DawnView Online v0.2
 
-This is a standalone Progressive Web App (PWA) built from Dawn View v2.16.0.
+DawnView Online v0.2 is the shareable Progressive Web App (PWA) version of Dawn View, built from the sanitized v2.16.0 web layer.
 
-## What changed from the personal Android build
+## v0.2 changes
 
-- Personal master-seed data has been removed.
-- The included records are fictitious sample data.
-- Plaid / bank connection support is not included in this build.
-- Settings shows Bank Sync as a possible future feature.
-- Google Calendar sync is not active in the web preview.
-- Data is stored locally in the browser using IndexedDB.
-- A **Start Fresh** option clears the sample personal data on that device.
-- The app includes a web manifest, icons, and service worker for install/offline behavior.
+- Keeps fictitious demo data so new users can immediately explore the app.
+- Adds a first-launch choice: **Explore Demo** or **Start Fresh**.
+- Improves mobile scrolling by removing expensive fixed-background effects on phones and simplifying the sticky navigation rendering.
+- Updates the service worker so new GitHub Pages releases are picked up more reliably instead of staying on an older cached app shell.
+- Renames the shareable release to **DawnView Online v0.2**.
+- Bank Sync remains visible as a possible future feature, but no Plaid/bank integration is included.
+- Data remains local to each browser/device using IndexedDB.
 
-## Test locally
+## Publish free with GitHub Pages — easiest method
 
-You must serve the folder over HTTP; opening `index.html` directly will not enable the service worker.
+1. Upload the **contents** of this folder to the root of your GitHub repository.
+2. Open **Settings → Pages**.
+3. Under **Build and deployment**, select **Deploy from a branch**.
+4. Select **main** and **/(root)**, then Save.
+5. Wait for GitHub Pages to publish the new version.
 
-Python:
-`python -m http.server 8000`
-
-Then open:
-`http://localhost:8000`
-
-## Publish free with GitHub Pages
-
-1. Create a new GitHub repository for the shareable preview.
-2. Upload the contents of this folder to the repository root.
-3. In GitHub, open **Settings → Pages**.
-4. Under **Build and deployment**, choose **GitHub Actions**.
-5. Push to `main` if needed. The included workflow deploys the site.
-6. When the workflow finishes, GitHub Pages will show the public URL.
-
-Important: publish **this sanitized folder**, not your personal Dawn View Android repository.
+If v0.1 was already installed or opened, refresh the page once after the deployment. The v0.2 service worker will replace the older cache.
 
 ## iPhone install
 
-1. Open the public Dawn View URL in Safari.
-2. Tap **Share**.
-3. Tap **Add to Home Screen**.
-4. Turn on **Open as Web App** if Safari shows the option.
-5. Tap **Add**.
-
-Dawn View will then launch from its Home Screen icon in a standalone window.
+Open the public URL in Safari → **Share → Add to Home Screen**. Enable **Open as Web App** when shown.
 
 ## Android install
 
-Open the URL in Chrome. Use **Install app** or **Add to Home screen** from the browser menu when offered.
+Open the URL in Chrome and use **Install app** or **Add to Home screen**.
 
-## Current limitation
+## Privacy / current limitations
 
-There are no user accounts or cloud sync in this preview. Each browser/device keeps its own local Dawn View data. Clearing site data or deleting browser storage can remove that device's data, so users should use **Export Backup** for anything they care about.
+- Included records are fictitious demo data.
+- No Plaid credentials or operational Bank Sync are present.
+- No cloud accounts or cross-device sync are included yet.
+- Clearing browser/site data can remove locally stored Dawn View data. Use **Export Backup** for anything important.

@@ -1,4 +1,4 @@
-const CACHE = "dawn-view-shareable-v0.1";
+const CACHE = "dawnview-online-v0.2";
 const CORE = [
   "./",
   "./index.html",
@@ -26,17 +26,34 @@ self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
 
-  event.respondWith(
-    caches.match(event.request).then(cached => {
-      const network = fetch(event.request).then(response => {
+  // Navigation and app code are network-first so GitHub Pages updates appear promptly.
+  const isAppShell = event.request.mode === "navigate" ||
+    /\/(?:index\.html|app\.js|styles\.css|manifest\.webmanifest)$/.test(url.pathname);
+
+  if (isAppShell) {
+    event.respondWith(
+      fetch(event.request).then(response => {
         if (response && response.ok) {
           const copy = response.clone();
           caches.open(CACHE).then(cache => cache.put(event.request, copy));
         }
         return response;
-      }).catch(() => cached || (event.request.mode === "navigate" ? caches.match("./index.html") : undefined));
+      }).catch(async () => {
+        return (await caches.match(event.request)) ||
+          (event.request.mode === "navigate" ? caches.match("./index.html") : undefined);
+      })
+    );
+    return;
+  }
 
-      return cached || network;
-    })
+  // Static media stays cache-first for smoother repeat use and offline support.
+  event.respondWith(
+    caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
+      if (response && response.ok) {
+        const copy = response.clone();
+        caches.open(CACHE).then(cache => cache.put(event.request, copy));
+      }
+      return response;
+    }))
   );
 });

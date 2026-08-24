@@ -1,7 +1,7 @@
 {
-  "name": "Dawn View",
+  "name": "DawnView Online",
   "short_name": "Dawn View",
-  "description": "A personal life dashboard for priorities, money, health, projects, relationships, and planning.",
+  "description": "DawnView Online is a shareable personal life dashboard for priorities, money, health, projects, relationships, and planning.",
   "id": "./",
   "start_url": "./",
   "scope": "./",
