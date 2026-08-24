@@ -5,8 +5,8 @@
   --warn:#ffcc4d;--good:#42ffd2;--cyan:#43e7ff;--glow:rgba(179,60,255,.35);
 }
 *{box-sizing:border-box}
-html{width:100%;max-width:100%;min-height:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;scroll-behavior:auto;background-color:#05010a;overscroll-behavior-y:none}
-body{margin:0;background-color:#05010a;background-image:radial-gradient(circle at 12% 0%,rgba(179,60,255,.18),transparent 32%),radial-gradient(circle at 92% 18%,rgba(67,231,255,.08),transparent 28%),linear-gradient(180deg,#05010a,#0d0318 52%,#05010a);color:var(--text);font-family:'Segoe UI',Roboto,Arial,sans-serif;min-height:100vh;min-height:100dvh;background-attachment:scroll;overflow-x:hidden;overscroll-behavior-y:none;-webkit-overflow-scrolling:touch;position:relative;isolation:isolate}
+html{width:100%;max-width:100%;min-height:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;scroll-behavior:auto;background-color:#05010a}
+body{margin:0;background-color:#05010a;background-image:radial-gradient(circle at 12% 0%,rgba(179,60,255,.18),transparent 32%),radial-gradient(circle at 92% 18%,rgba(67,231,255,.08),transparent 28%),linear-gradient(180deg,#05010a,#0d0318 52%,#05010a);color:var(--text);font-family:'Segoe UI',Roboto,Arial,sans-serif;min-height:100vh;min-height:100dvh;background-attachment:scroll;overflow-x:hidden;-webkit-overflow-scrolling:touch;position:relative;isolation:isolate}
 main{max-width:1200px;min-height:100vh;min-height:100dvh;margin:auto;padding:14px}
 header{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start}
 h1,h2,h3{margin:.25rem 0}
@@ -368,7 +368,7 @@ html[data-theme="obsidian"] .tabs{scrollbar-color:#5b3d69 transparent}
 }
 
 
-/* DawnView Online v0.4 — mobile/PWA scrolling, root-canvas and first-launch polish */
+/* DawnView Online v0.5 — mobile/PWA scrolling, root-canvas and first-launch polish */
 @media(min-width:761px){body{background-attachment:fixed}body::before{position:fixed}}
 @media(hover:none),(pointer:coarse){button:hover,.button:hover{transform:none}.card:hover{border-color:rgba(121,48,160,.72)}}
 @media(max-width:760px){
@@ -387,9 +387,10 @@ html[data-theme="obsidian"] .tabs{scrollbar-color:#5b3d69 transparent}
 @media(max-width:430px){.welcome-options{grid-template-columns:1fr}}
 
 
-/* v0.4: prevent white browser canvas from appearing during mobile rubber-band/overscroll. */
+/* v0.5: keep the browser canvas dark without suppressing normal page scrolling. */
 @media(max-width:760px){
-  html,body{background-color:#05010a!important;overscroll-behavior-y:none}
+  html{background-color:#05010a!important;overflow-y:auto}
+  body{background-color:#05010a!important;overflow-y:visible;touch-action:pan-y pinch-zoom}
   html[data-theme="slate"],html[data-theme="slate"] body{background-color:#141218!important}
   html[data-theme="obsidian"],html[data-theme="obsidian"] body{background-color:#101012!important}
 }

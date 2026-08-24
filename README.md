@@ -1,18 +1,12 @@
-# DawnView Online v0.4
+# DawnView Online v0.5
 
-DawnView Online v0.4 is the shareable Progressive Web App (PWA) version of Dawn View.
+DawnView Online v0.5 is the shareable Progressive Web App (PWA) version of Dawn View.
 
-## v0.4 changes
-- Prevents the white browser canvas from flashing through during mobile overscroll by applying the Dawn View background to the root page.
-- Adds mobile overscroll containment and full-viewport background coverage.
+## v0.5 changes
 
-- The demo/personalization banner now disappears completely after **Make it yours** is selected.
-- The banner also disappears after **Start Fresh**.
-- Resetting the device back to demo data restores the banner.
-- Existing v0.2 personalization state is migrated so upgrading users do not have to personalize again.
-- Keeps the mobile scrolling improvements and network-first update behavior from v0.2.
-- Bank Sync remains listed as a future feature; no Plaid integration is included.
-- User data remains local to each browser/device using IndexedDB.
+- Restores normal vertical touch scrolling on mobile.
+- Keeps the HTML/root canvas dark so overscroll does not flash white.
+- Retains v0.3 personalization behavior and PWA update improvements.
 
 ## Update the live GitHub Pages site
 
