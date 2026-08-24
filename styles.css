@@ -5,9 +5,9 @@
   --warn:#ffcc4d;--good:#42ffd2;--cyan:#43e7ff;--glow:rgba(179,60,255,.35);
 }
 *{box-sizing:border-box}
-html{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;scroll-behavior:auto}
-body{margin:0;background:radial-gradient(circle at 12% 0%,rgba(179,60,255,.18),transparent 32%),radial-gradient(circle at 92% 18%,rgba(67,231,255,.08),transparent 28%),linear-gradient(180deg,#05010a,#0d0318 52%,#05010a);color:var(--text);font-family:'Segoe UI',Roboto,Arial,sans-serif;min-height:100vh;min-height:100dvh;background-attachment:scroll;overflow-x:hidden;-webkit-overflow-scrolling:touch}
-main{max-width:1200px;margin:auto;padding:14px}
+html{width:100%;max-width:100%;min-height:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;scroll-behavior:auto;background-color:#05010a;overscroll-behavior-y:none}
+body{margin:0;background-color:#05010a;background-image:radial-gradient(circle at 12% 0%,rgba(179,60,255,.18),transparent 32%),radial-gradient(circle at 92% 18%,rgba(67,231,255,.08),transparent 28%),linear-gradient(180deg,#05010a,#0d0318 52%,#05010a);color:var(--text);font-family:'Segoe UI',Roboto,Arial,sans-serif;min-height:100vh;min-height:100dvh;background-attachment:scroll;overflow-x:hidden;overscroll-behavior-y:none;-webkit-overflow-scrolling:touch;position:relative;isolation:isolate}
+main{max-width:1200px;min-height:100vh;min-height:100dvh;margin:auto;padding:14px}
 header{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start}
 h1,h2,h3{margin:.25rem 0}
 small,.muted{color:var(--muted)}
@@ -187,6 +187,7 @@ dialog{background:linear-gradient(145deg,#130821,#07020d);border-color:#73319a;b
 
 /* v2.10.0 theme system + Google Calendar */
 html[data-theme="slate"]{
+  background-color:#141218;
   --bg:#141218;--panel:#211e25;--panel2:#2b2730;--text:#f4f1f6;--muted:#bcb6c2;
   --accent:#80639a;--accent2:#b29ac5;--line:#4c4453;--danger:#d7687f;
   --warn:#d7ad62;--good:#70c4a3;--cyan:#a98fc0;--glow:rgba(128,99,154,.14);
@@ -226,6 +227,7 @@ html[data-theme="slate"] .status-action.selected,html[data-theme="slate"] .selec
 
 /* v2.11.2 Obsidian Signal theme */
 html[data-theme="obsidian"]{
+  background-color:#101012;
   --bg:#111113;--panel:#1a1a1f;--panel2:#232129;--text:#f7f7f8;--muted:#b7b7be;
   --accent:#39204f;--accent2:#6d3f91;--line:#3a3540;--danger:#ff668a;
   --warn:#e5bf70;--good:#68f59a;--cyan:#68f59a;--glow:rgba(104,245,154,.10);
@@ -366,7 +368,7 @@ html[data-theme="obsidian"] .tabs{scrollbar-color:#5b3d69 transparent}
 }
 
 
-/* DawnView Online v0.2 — mobile/PWA scrolling and first-launch polish */
+/* DawnView Online v0.4 — mobile/PWA scrolling, root-canvas and first-launch polish */
 @media(min-width:761px){body{background-attachment:fixed}body::before{position:fixed}}
 @media(hover:none),(pointer:coarse){button:hover,.button:hover{transform:none}.card:hover{border-color:rgba(121,48,160,.72)}}
 @media(max-width:760px){
@@ -383,3 +385,11 @@ html[data-theme="obsidian"] .tabs{scrollbar-color:#5b3d69 transparent}
 .welcome-options{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:18px 0 12px}
 .welcome-options button{width:100%}
 @media(max-width:430px){.welcome-options{grid-template-columns:1fr}}
+
+
+/* v0.4: prevent white browser canvas from appearing during mobile rubber-band/overscroll. */
+@media(max-width:760px){
+  html,body{background-color:#05010a!important;overscroll-behavior-y:none}
+  html[data-theme="slate"],html[data-theme="slate"] body{background-color:#141218!important}
+  html[data-theme="obsidian"],html[data-theme="obsidian"] body{background-color:#101012!important}
+}

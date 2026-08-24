@@ -1,4 +1,4 @@
-const CACHE = "dawnview-online-v0.3-r1";
+const CACHE = "dawnview-online-v0.4-r1";
 const CORE = [
   "./",
   "./index.html",

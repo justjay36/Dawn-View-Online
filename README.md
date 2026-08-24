@@ -1,8 +1,10 @@
-# DawnView Online v0.3
+# DawnView Online v0.4
 
-DawnView Online v0.3 is the shareable Progressive Web App (PWA) version of Dawn View.
+DawnView Online v0.4 is the shareable Progressive Web App (PWA) version of Dawn View.
 
-## v0.3 changes
+## v0.4 changes
+- Prevents the white browser canvas from flashing through during mobile overscroll by applying the Dawn View background to the root page.
+- Adds mobile overscroll containment and full-viewport background coverage.
 
 - The demo/personalization banner now disappears completely after **Make it yours** is selected.
 - The banner also disappears after **Start Fresh**.
