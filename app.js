@@ -1017,6 +1017,21 @@ async function importBackup(file){
   state=hydrate(MASTER_SEED,parsed);await persist();renderAll();
 }
 
+const PERSONALIZE_CTA_KEY="dawnview-online-v0.2-personalized";
+function setMakeItYoursVisible(visible){
+  const button=$("makeItYoursBtn");
+  if(button)button.classList.toggle("hidden",!visible);
+}
+function syncMakeItYoursCta(){
+  let personalized=false;
+  try{personalized=Boolean(localStorage.getItem(PERSONALIZE_CTA_KEY));}catch{}
+  setMakeItYoursVisible(!personalized);
+}
+function markPersonalized(){
+  try{localStorage.setItem(PERSONALIZE_CTA_KEY,"1");}catch{}
+  setMakeItYoursVisible(false);
+}
+
 async function startFresh(skipConfirm=false){
   if(!skipConfirm&&!confirm("Start fresh? This replaces the sample data stored on this device."))return;
   const fresh=clone(MASTER_SEED);
@@ -1058,6 +1073,7 @@ async function startFresh(skipConfirm=false){
   state=fresh;
   await persist();
   renderAll();
+  markPersonalized();
   try{localStorage.setItem("dawnview-online-v0.2-welcome","fresh");}catch{}
   alert("Fresh local workspace created.");
 }
@@ -1107,7 +1123,8 @@ function bind(){
   $("runSimulation").onclick=simulate;$("saveSimulation").onclick=async()=>{state.decision_simulator.saved_scenarios.push(simulate());await persist();renderSimulator();};
   $("exportBtn").onclick=exportBackup;
   $("importFile").onchange=async e=>{try{if(e.target.files[0]){await importBackup(e.target.files[0]);alert("Backup imported.");}}catch(error){alert(error.message);}};
-  $("resetBtn").onclick=async()=>{if(confirm("Reset this device to the sample preview data?")){state=clone(MASTER_SEED);await persist();renderAll();}};const freshBtn=$("freshStartBtn");if(freshBtn)freshBtn.onclick=()=>startFresh(false);
+  $("resetBtn").onclick=async()=>{if(confirm("Reset this device to the sample preview data?")){state=clone(MASTER_SEED);await persist();try{localStorage.removeItem(PERSONALIZE_CTA_KEY);}catch{}setMakeItYoursVisible(true);renderAll();}};const freshBtn=$("freshStartBtn");if(freshBtn)freshBtn.onclick=()=>startFresh(false);
+  const makeItYoursBtn=$("makeItYoursBtn");if(makeItYoursBtn)makeItYoursBtn.onclick=()=>{markPersonalized();openView("settings");};
   const exploreDemoBtn=$("exploreDemoBtn");if(exploreDemoBtn)exploreDemoBtn.onclick=()=>{try{localStorage.setItem("dawnview-online-v0.2-welcome","demo");}catch{}$("welcomeDialog")?.close();};
   const welcomeFreshBtn=$("welcomeFreshBtn");if(welcomeFreshBtn)welcomeFreshBtn.onclick=async()=>{$("welcomeDialog")?.close();await startFresh(true);};
 }
@@ -1124,6 +1141,7 @@ applyTheme();
     const source=await loadState();
     renderStatus(source);
     bind();
+    syncMakeItYoursCta();
     renderAll();
     renderBankSync();
     showFirstLaunchWelcome();
